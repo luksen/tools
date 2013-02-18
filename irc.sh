@@ -8,7 +8,7 @@ then
         suffix=$[suffix + 1]
     done
 
-    tmux split-window -l 1 "sic $* > out$suffix"
+    tmux split-window -l 1 "rlwrap sic $* > out$suffix"
     tail -F "out$suffix" 
 else
     tmux new-session "$0 $*"
