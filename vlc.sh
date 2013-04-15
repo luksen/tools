@@ -1,7 +1,7 @@
 #!/bin/bash
 # dwb: öv
 
-for pid in $(pidof dwb)
+for pid in $(pidof plugin-container)
 do
     video=$(find /proc/$pid/fd/ -lname /tmp/Flash*)
     if [[ -n "$video" ]]
