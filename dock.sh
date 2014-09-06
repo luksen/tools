@@ -6,7 +6,7 @@ echo $switch
 if [[ $switch == "on" ]]
 then
 	# configure additional screen
-	xrandr --output HDMI1 --auto --output LVDS1 --auto --right-of HDMI1
+	xrandr --output HDMI1 --auto --output LVDS1 --auto --left-of HDMI1
 
 	# turn off usb autosuspend
 	for f in /sys/bus/usb/drivers/usb/*/power/autosuspend
