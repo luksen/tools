@@ -1,5 +1,4 @@
 #!/bin/bash
-# dwb: öv
 
 for pid in $(pidof plugin-container)
 do
