@@ -16,6 +16,10 @@ then
 
 	# turn off screen blanking
 	xset -dpms
+
+	#turn on ethernet
+	ip link set wlan0 down
+	netctl start ethernet
 else
 	# configure laptop screen
 	xrandr --output HDMI1 --off --output LVDS1 --auto
