@@ -39,7 +39,7 @@ function __note() {
 function big() {
 	echo -e "size\tlast modified\t\tfile"
 	echo -e "‾‾‾‾\t‾‾‾‾‾‾‾‾‾‾‾‾‾\t\t‾‾‾‾"
-	find "$@" -mindepth 1 -maxdepth 1 -true -exec bash -c 'eval du -sh --time {} 2>/dev/null' ';' | sed 's/\.\///' | sort -h | tail
+	find "$@" -mindepth 1 -maxdepth 1 -true -exec bash -c 'eval du -sh --time "{}" 2>/dev/null' ';' | sed 's/\.\///' | sort -h | tail
 }
 
 
