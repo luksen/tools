@@ -20,6 +20,11 @@ then
 	# turn on ethernet
 	sudo ip link set wlan0 down
 	sudo netctl start ethernet
+
+	# put some stuff on laptop screen
+	i3-msg "workspace \"5:g\"; append_layout tools/data/lvds.json"
+	gnome-terminal -e 'clock -zoom=4 -char=▒'
+	gnome-terminal -e 'snot -1'
 else
 	# configure laptop screen
 	xrandr --output HDMI1 --off --output LVDS1 --auto
