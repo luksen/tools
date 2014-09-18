@@ -22,10 +22,9 @@ function note() {
 	else
 		vim "$notedir/${1}.mkdn"
 	fi
-	d=$(pwd)
-	cd $notedir
+	pushd "$notedir"
 	git up
-	cd $d
+	popd
 }
 function __note() {
 	notes=$(ls -t -Q $notedir -I archiv -I config.sh -I notes.vim)
