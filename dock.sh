@@ -11,15 +11,15 @@ then
 	# turn off usb autosuspend
 	for f in /sys/bus/usb/drivers/usb/*/power/autosuspend
 	do
-		echo '-1' > $f
+		sudo su -c "echo '-1' > $f"
 	done
 
 	# turn off screen blanking
 	xset -dpms
 
-	#turn on ethernet
-	ip link set wlan0 down
-	netctl start ethernet
+	# turn on ethernet
+	sudo ip link set wlan0 down
+	sudo netctl start ethernet
 else
 	# configure laptop screen
 	xrandr --output HDMI1 --off --output LVDS1 --auto
@@ -27,7 +27,7 @@ else
 	# turn on usb autosuspend
 	for f in /sys/bus/usb/drivers/usb/*/power/autosuspend
 	do
-		echo '2' > $f
+		sudo su -c "echo 2 > $f"
 	done
 
 	# turn on screen blanking
