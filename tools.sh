@@ -88,6 +88,5 @@ while read func
 do
 	_func_complete $func
 done < <( 
-grep -o 'function __.\+()' ~/tools/tools.sh |
-sed 's/.*__//' |
-sed 's/()//' )
+grep -o '^function\s\+__.\+()' ~/tools/tools.sh |
+sed 's/function\s\+__\([^[:space:](]\+\)\s*()/\1/g' )
