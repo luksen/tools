@@ -2,7 +2,8 @@
 
 dest="/media/raft/thinkpad.bak"
 exfile="$(dirname $0)/data/backup.exclude"
-opts="aAXv"
+opts="-aAXh --delete-delay --delete-excluded"
+info="REMOVE,DEL,MISC,MOUNT,SKIP,STATS"
 
 if [[ $(id -u) != 0 ]]
 then
@@ -26,7 +27,7 @@ do
     echo "    $line"
 done < "$exfile"
 echo "command:"
-echo "    rsync -$opts / $dest --exclude-from=$exfile"
+echo "    rsync -$opts / $dest --exclude-from=$exfile --info=$info"
 echo
 
-rsync -$opts / $dest --exclude-from=$exfile
+rsync $opts / "$dest" --exclude-from="$exfile" --info="$info"
