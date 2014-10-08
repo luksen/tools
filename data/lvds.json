@@ -7,54 +7,64 @@
     "percent": null,
     "type": "con",
     "nodes": [
-    {
-        // splitv split container with 2 children
-        "border": "pixel",
-        "floating": "auto_off",
-        "layout": "splitv",
-        "percent": 1,
-        "type": "con",
-        "nodes": [
         {
-            "border": "none",
+            // splitv split container with 2 children
+            "border": "pixel",
             "floating": "auto_off",
-            "geometry": {
-                "height": 362,
-                "width": 642,
-                "x": 0,
-                "y": 0
-            },
-            "name": "luki@dinghy:~",
-            "percent": 0.467123287671233,
-            "swallows": [
-            {
-                "class": "^Gnome-terminal$",
-                "title": "Terminal"
-            }
-            ],
-            "type": "con"
-        },
-        {
-            "border": "none",
-            "floating": "auto_off",
-            "geometry": {
-                "height": 362,
-                "width": 642,
-                "x": 0,
-                "y": 0
-            },
-            "name": "luki@dinghy:~",
-            "percent": 0.532876712328767,
-            "swallows": [
-            {
-                "class": "^Gnome-terminal$",
-                "title": "Terminal"
-            }
-            ],
-            "type": "con"
+            "layout": "splitv",
+            "percent": 1,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "none",
+                    "floating": "auto_off",
+                    "geometry": {
+                        "height": 362,
+                        "width": 642,
+                        "x": 0,
+                        "y": 0
+                    },
+                    "name": "luki@dinghy:~",
+                    "percent": 0.467123287671233,
+                    "swallows": [
+                        {
+                            "class": "^Gnome-terminal$",
+                            "title": "Terminal"
+                        }
+                    ],
+                    "type": "con"
+                },
+                {
+                    // splitv split container with 2 children
+                    "border": "pixel",
+                    "floating": "auto_off",
+                    "layout": "splith",
+                    "percent": 1,
+                    "type": "con",
+                    "nodes": [
+                        {
+                            "border": "none",
+                            "floating": "auto_off",
+                            "geometry": {
+                                "height": 362,
+                                "width": 642,
+                                "x": 0,
+                                "y": 0
+                            },
+                            "name": "luki@dinghy:~",
+                            "percent": 0.532876712328767,
+                            "swallows": [
+                                {
+                                    "class": "^Gnome-terminal$",
+                                    "title": "Terminal"
+                                }
+                            ],
+                            "type": "con"
+                        }
+                    ]
+                }
+            ]
         }
-        ]
-    }
     ]
 }
 
