@@ -4,32 +4,54 @@
 
 
 ################################################################################
+# run COMMAND - launch application as non-child
+################################################################################
+function run() {
+	$1&
+	disown
+}
+
+
+################################################################################
+# gote - Open another terminal at same location
+################################################################################
+function gote() {
+	sakura&
+	disown
+}
+
+
+################################################################################
+# comp PARTIAL COMMAND  -  generate possible completions for PARTIAL COMMAND
+################################################################################
+# Slighty amended from this SO question:
+# https://unix.stackexchange.com/questions/25935/how-to-output-string-completions-to-stdout
+# (needs bash_completion)
+comp() {
+	COMP_LINE="$*"
+	COMP_WORDS=("$@")
+	COMP_CWORD=${#COMP_WORDS[@]}
+	((COMP_CWORD--))
+	COMP_POINT=${#COMP_LINE}
+	#COMP_WORDBREAKS='"'"'><=;|&(:"
+	# Don't really thing any real autocompletion script will rely on
+	# the following 2 vars, but on principle they could ~~~  LOL.
+	COMP_TYPE=9
+	COMP_KEY=9
+	_command_offset 0 2>/dev/null
+	for rep in ${COMPREPLY[@]}
+	do
+		echo $rep
+	done
+}
+
+
+################################################################################
 # cdgo PACKAGE  -  shortcut to go sources on github
 ################################################################################
 godir="$HOME/go/src/github.com/luksen/"
 function cdgo() { cd $godir/$1; }
 function __cdgo() { ls -Q $godir; }
-
-
-################################################################################
-# note NOTEBOOK  -  note taking
-################################################################################
-notedir="$HOME/notes/"
-function note() {
-	if [ -z $1 ]
-	then
-		vim "$notedir/misc.mkdn"
-	else
-		vim "$notedir/${1}.mkdn"
-	fi
-	pushd "$notedir"
-	git up
-	popd
-}
-function __note() {
-	notes=$(ls -t -Q $notedir -I archiv -I config.sh -I notes.vim)
-	echo "${notes[@]//.mkdn/}"
-}
 
 
 ################################################################################
@@ -39,14 +61,6 @@ function big() {
 	echo -e "size\tlast modified\t\tfile"
 	echo -e "‾‾‾‾\t‾‾‾‾‾‾‾‾‾‾‾‾‾\t\t‾‾‾‾"
 	find "$@" -mindepth 1 -maxdepth 1 -true -exec bash -c 'eval du -sh --time "{}" 2>/dev/null' ';' | sed 's/\.\///' | sort -h | tail
-}
-
-
-################################################################################
-# shosho SHOW  -  completion for shosho
-################################################################################
-function __shosho() {
-	cat sho.csv | cut -d, -f1 | sed 's/^.*$/"&"/'
 }
 
 
