@@ -1,12 +1,15 @@
 switch="on"
 [[ $1 == "off" ]] && switch="off"
 
-echo $switch
+# find touchpad
+# wiki.archlinux.org
+declare -i ID
+ID=`xinput list | grep -Eo 'ouchPad\s*id\=[0-9]{1,2}' | grep -Eo '[0-9]{1,2}'`
 
 if [[ $switch == "on" ]]
 then
 	# configure additional screen
-	xrandr --output HDMI1 --auto --output LVDS1 --auto --left-of HDMI1
+	xrandr --output HDMI1 --auto --output LVDS1 --off
 
 	# turn off usb autosuspend
 	for f in /sys/bus/usb/drivers/usb/*/power/autosuspend
@@ -21,10 +24,11 @@ then
 	sudo ip link set wlan0 down
 	sudo netctl start ethernet
 
-	# put some stuff on laptop screen
-	i3-msg "workspace \"5:g\"; append_layout tools/data/lvds.json"
-	gnome-terminal -e 'clock -zoom=4 -char=▒'
-	gnome-terminal -e 'snot -1'
+	# turn off touchpad
+	xinput disable $ID
+
+	# announce completion
+	notify-send 'Using docked configuration'
 else
 	# configure laptop screen
 	xrandr --output HDMI1 --off --output LVDS1 --auto
@@ -37,6 +41,12 @@ else
 
 	# turn on screen blanking
 	xset dpms 0 0 300
+
+	# turn on touchpad
+	xinput enable $ID
+
+	# announce completion
+	notify-send 'Using mobile configuration'
 fi
 
-eval $(</home/luki/.fehbg)
+eval "$(</home/luki/.fehbg)"
