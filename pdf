@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+while [[ $# > 0 ]]
+do
+	(echo "$1" | entr xdotool search --name "$1" key r &
+	id="$!"
+	mupdf "$1"
+	kill "$id")&
+	shift
+done
