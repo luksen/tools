@@ -16,8 +16,12 @@ function run() {
 # gote - Open another terminal at same location
 ################################################################################
 function gote() {
-	sakura&
-	disown
+	# default $1 to 1
+	for i in $(seq ${1:-1})
+	do
+		sakura&
+		disown
+	done
 }
 
 
